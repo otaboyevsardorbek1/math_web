@@ -66,4 +66,4 @@ def get_results(data_name):
         return {"error": str(e)}, 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run()
