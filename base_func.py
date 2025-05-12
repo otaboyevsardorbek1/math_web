@@ -2,7 +2,7 @@ import os
 import numpy as np
 import math
 # JSON fayl saqlanadigan yo'l
-def file_path(path: str):
+def file_path(path: str): # FAYILLARNI YARATISH VA OCHISHDA ISHLATISHI UCHUN FILE PATH BERADIGAN FUNQSIYA
     current_dir = os.getcwd()
     final_dir = os.path.join(current_dir, 'Data')
     if not os.path.exists(final_dir):
@@ -10,8 +10,9 @@ def file_path(path: str):
     return os.path.join(final_dir, path)
 
 # nuyuton itaratsiya funqsiylari
-def is_valid_number(val):
+def is_valid_number(val): # KIRITILGAN STR ICHIDAGI RASMLARNI BOS YO`QLINI TESHKIISH`
     return isinstance(val, (int, float)) and not (np.isnan(val) or np.isinf(val))
+
 # Foydalanuvchi ifodasini lambda funksiyaga aylantirish
 def parse_to_lambda(expr):
     return eval(f"lambda x, y: {expr}", {"np": np, "__builtins__": {}})
@@ -24,7 +25,7 @@ def numerical_jacobian(f1, f2, x0, y0, h=1e-5):
     df2_dy = (f2(x0, y0 + h) - f2(x0, y0 - h)) / (2 * h)
     return np.array([[df1_dx, df1_dy], [df2_dx, df2_dy]])
 
-# Nyuton-Rafson usuli
+# Nyuton-Rafson usuli FUNQSIYASI
 def newton_raphson(func1_str, func2_str, start_x, start_y, epsilon, max_iter=100):
     func1 = parse_to_lambda(func1_str)
     func2 = parse_to_lambda(func2_str)
@@ -65,6 +66,7 @@ def newton_raphson(func1_str, func2_str, start_x, start_y, epsilon, max_iter=100
 
     return results
 # nuyuton itaratsiya funqsiyalari yakuni
+
 # Formatlash funksiyasi: f(x,y)=C ko’rinishini g(x,y) = o'zgaruvchi qiymat sifatida yozish
 def preprocess_expression(expr):
     if "=" in expr:
@@ -72,7 +74,7 @@ def preprocess_expression(expr):
         return f"({rhs})"  # Biz faqat ifodaning o'ng tarafini hisoblaymiz
     return expr
 
-
+# ODDIY ITARATSIYA USULI UCHUN FUNQSIYA
 def iterate_values(func1, func2, start_x, start_y, epsilon, max_iter=100):
     results = []
     k = 0
