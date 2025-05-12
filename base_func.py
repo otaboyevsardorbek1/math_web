@@ -65,8 +65,6 @@ def newton_raphson(func1_str, func2_str, start_x, start_y, epsilon, max_iter=100
 
     return results
 # nuyuton itaratsiya funqsiyalari yakuni
-
-
 # Formatlash funksiyasi: f(x,y)=C ko’rinishini g(x,y) = o'zgaruvchi qiymat sifatida yozish
 def preprocess_expression(expr):
     if "=" in expr:
@@ -74,9 +72,6 @@ def preprocess_expression(expr):
         return f"({rhs})"  # Biz faqat ifodaning o'ng tarafini hisoblaymiz
     return expr
 
-
-def is_valid_number(val):
-    return isinstance(val, (int, float)) and not (np.isnan(val) or np.isinf(val))
 
 def iterate_values(func1, func2, start_x, start_y, epsilon, max_iter=100):
     results = []
