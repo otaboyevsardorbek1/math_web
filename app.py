@@ -1,9 +1,10 @@
 from flask import Flask, request, render_template, redirect, send_file, jsonify
 from base_func import (newton_raphson,iterate_values,file_path)
 import json
+
 app = Flask(__name__)
-
-
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['JSONIFY_MIMETYPE'] = 'application/json'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
