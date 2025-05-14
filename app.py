@@ -3,10 +3,8 @@ from base_func import (newton_raphson,iterate_values,file_path)
 import json
 
 app = Flask(__name__)
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-app.config['JSONIFY_MIMETYPE'] = 'application/json'
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
     return render_template('home.html')
 
