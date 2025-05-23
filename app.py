@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, send_file, jsonify
 from base_func import (newton_raphson,iterate_values,file_path)
+from datetime import datetime
 import json
 
 app = Flask(__name__)
@@ -21,14 +22,16 @@ def base_urls(url):
             epsilon = float(request.form.get('Epslon'))
             if str(url) ==str('itaratsiya'):
                 results = iterate_values(func1, func2, start_x, start_y, epsilon)
-                json_path = file_path('itaratsiya.json')
+                filename = f'itaratsiya_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+                json_path = file_path(filename)
                 with open(json_path, 'w', encoding='utf-8') as f:
                     json.dump({'iterations': results}, f, indent=4)
                 return render_template(
                 'itaratsiya.html',results=results,data=data,error=None)
             elif str(url)==str('nyuton_itaratsiya'):
                 results = newton_raphson(func1, func2, start_x, start_y, epsilon)
-                json_path = file_path('nyuton_itaratsiya.json')
+                filename = f'nyuton_itaratsiya_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+                json_path = file_path(filename)
                 with open(json_path, 'w', encoding='utf-8') as f:
                     json.dump({'iterations': results}, f, indent=4)
                 return render_template('nuyuton_itaratsiya.html',results=results,data=data,error=None)
