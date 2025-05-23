@@ -82,7 +82,7 @@
     </table>
 
     <div class="mt-4">
-        <a href="{{ url_for('download_file', file_name='itaratsiya') }}" class="btn btn-success">
+        <a href="{{ url_for('download_file', file_name=filename.replace('.json', '')) }}" class="btn btn-success">
             📥 JSON natijani yuklab olish
         </a>
         

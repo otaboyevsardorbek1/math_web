@@ -1,13 +1,37 @@
 import os
 import numpy as np
 import math
+import time
+# APP JSON FILE PATH 
+current_dir = os.getcwd()
+final_dir = os.path.join(current_dir, 'Data')
+
+# kesh faylillarni o`chirish uchun funqsiya
+def clean_old_files(directory, age_limit_seconds=300):
+    os.makedirs(directory, exist_ok=True)  # Papka mavjud bo‘lmasa yaratadi
+
+    now = time.time()
+    for filename in os.listdir(directory):
+        file_path_full = os.path.join(directory, filename)
+        if os.path.isfile(file_path_full):
+            file_age = now - os.path.getmtime(file_path_full)
+            if file_age > age_limit_seconds:
+                try:
+                    os.remove(file_path_full)
+                except Exception:
+                    return
+
+                
+def periodic_cleaner(interval_seconds=60):
+    while True:
+        clean_old_files(directory='Data', age_limit_seconds=86400) 
+        time.sleep(interval_seconds)
+
 # JSON fayl saqlanadigan yo'l
-def file_path(path: str): # FAYILLARNI YARATISH VA OCHISHDA ISHLATISHI UCHUN FILE PATH BERADIGAN FUNQSIYA
-    current_dir = os.getcwd()
-    final_dir = os.path.join(current_dir, 'Data')
-    if not os.path.exists(final_dir):
-        os.makedirs(final_dir)
-    return os.path.join(final_dir, path)
+def file_path(filename):
+    directory = os.path.join(os.path.dirname(__file__), 'Data')
+    os.makedirs(directory, exist_ok=True)  # Yo‘lni yaratadi agar mavjud bo'lmasa
+    return os.path.join(directory, filename)
 
 # nuyuton itaratsiya funqsiylari
 def is_valid_number(val): # KIRITILGAN STR ICHIDAGI RASMLARNI BOS YO`QLINI TESHKIISH`

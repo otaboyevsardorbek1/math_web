@@ -59,7 +59,9 @@
 </style>
 
 {% if results %}
-    <table>
+    {% if results[0].error %}
+        <h2 class="text-danger">Xatolik: {{ results[0].error }}</h2>
+    {% else %}<table>
         <tr>
             <th>Iteratsiya</th>
             <th>x</th>
@@ -77,9 +79,11 @@
             </tr>
         {% endfor %}
     </table>
+    {% endif %}
+    
     <br>
     <div class="mt-4">
-        <a href="{{ url_for('download_file', file_name='nyuton_itaratsiya') }}" class="btn btn-success">
+        <a href="{{ url_for('download_file', file_name=filename.replace('.json', '')) }}" class="btn btn-success">
             📥 JSON natijani yuklab olish
         </a>
         
